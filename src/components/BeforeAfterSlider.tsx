@@ -59,7 +59,7 @@ const BeforeAfterSlider = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-[16/10] overflow-hidden rounded-t-2xl cursor-ew-resize select-none"
+      className="relative w-[80vw] h-[40vh] overflow-hidden rounded-t-2xl cursor-ew-resize select-none"
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
       onMouseLeave={handleMouseUp}

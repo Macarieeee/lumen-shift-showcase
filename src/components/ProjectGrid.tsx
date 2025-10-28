@@ -1,6 +1,13 @@
 import { useState } from "react";
 import ProjectCard, { Project } from "./ProjectCard";
 import FilterBar from "./FilterBar";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 // Import images
 import cafeBeforeImg from "@/assets/projects/cafe-before.jpg";
@@ -111,17 +118,31 @@ const ProjectGrid = () => {
 
         <FilterBar activeFilter={activeFilter} onFilterChange={setActiveFilter} />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 animate-fade-in-up">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-
-        {filteredProjects.length === 0 && (
+        {filteredProjects.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-xl text-muted-foreground">
               No projects found in this category
             </p>
+          </div>
+        ) : (
+          <div className="mt-12 animate-fade-in-up flex items-center justify-center">
+            <Carousel
+              opts={{
+                align: "center",
+                loop: true,
+              }}
+              className="w-full max-w-[85vw]"
+            >
+              <CarouselContent>
+                {filteredProjects.map((project) => (
+                  <CarouselItem key={project.id}>
+                    <ProjectCard project={project} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-4" />
+              <CarouselNext className="right-4" />
+            </Carousel>
           </div>
         )}
       </div>
