@@ -85,7 +85,7 @@ const CTASection = () => {
             </form>
           </div>
 
-          <div className="mt-12 text-center">
+          {/* <div className="mt-12 text-center">
             <p className="text-sm text-muted-foreground mb-4">
               Or reach us directly
             </p>
@@ -97,7 +97,7 @@ const CTASection = () => {
                 +40 123 456 789
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

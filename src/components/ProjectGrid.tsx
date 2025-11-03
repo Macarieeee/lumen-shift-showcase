@@ -130,6 +130,8 @@ const ProjectGrid = () => {
               opts={{
                 align: "center",
                 loop: true,
+                watchDrag: false,   // ⬅️ dezactivează drag-ul (mouse + touch)
+                dragFree: false,
               }}
               className="w-full max-w-[85vw]"
             >

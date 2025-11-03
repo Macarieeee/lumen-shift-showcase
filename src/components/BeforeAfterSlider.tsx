@@ -100,7 +100,7 @@ const BeforeAfterSlider = ({
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseDown}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-foreground shadow-lg flex items-center justify-center">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-primary shadow-lg flex items-center justify-center">
           <ChevronLeft className="w-4 h-4 absolute left-1" />
           <ChevronRight className="w-4 h-4 absolute right-1" />
         </div>

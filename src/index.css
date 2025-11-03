@@ -2,69 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Design system — all HEX, indigo primary */
 
 @layer base {
   :root {
-    /* Deep dark background - lighting company premium theme */
-    --background: 210 14% 5%;
-    --foreground: 210 40% 98%;
+    /* Base */
+    --background: #0B0D0F;   /* deep dark */
+    --foreground: #F8FAFC;   /* near-white */
 
-    /* Card styles with subtle elevation */
-    --card: 210 14% 8%;
-    --card-foreground: 210 40% 98%;
+    /* Surfaces */
+    --card: #121417;
+    --card-foreground: #F8FAFC;
+    --popover: #121417;
+    --popover-foreground: #F8FAFC;
 
-    --popover: 210 14% 8%;
-    --popover-foreground: 210 40% 98%;
+    /* Primary / Accent — INDIGO */
+    --primary: #4F39F6;              /* oklch(0.511 .262 276.966) */
+    --primary-foreground: #FFFFFF;
+    --accent: #4F39F6;
+    --accent-foreground: #FFFFFF;
 
-    /* Emerald/teal accent for "After" - premium lighting glow */
-    --primary: 170 75% 45%;
-    --primary-foreground: 210 40% 98%;
+    /* Secondary (amber) */
+    --secondary: #EE9D2B;
+    --secondary-foreground: #F8FAFC;
 
-    /* Amber accent for "Before" - warm tone */
-    --secondary: 35 85% 55%;
-    --secondary-foreground: 210 14% 5%;
+    /* Muted / Text-muted */
+    --muted: #1A1F23;
+    --muted-foreground: #8A99A8;
 
-    /* Muted tones for subtle elements */
-    --muted: 210 14% 12%;
-    --muted-foreground: 210 15% 60%;
+    /* States / Misc */
+    --destructive: #EF4444;
+    --destructive-foreground: #F8FAFC;
 
-    /* Accent for highlights */
-    --accent: 170 75% 45%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 210 14% 15%;
-    --input: 210 14% 12%;
-    --ring: 170 75% 45%;
+    --border: #21262C;
+    --input: #1A1F23;
+    --ring: #4F39F6;                 /* focus outline pe indigo */
 
     --radius: 1rem;
 
-    /* Gradients for lighting effects */
-    --gradient-after: linear-gradient(135deg, hsl(170, 75%, 45%) 0%, hsl(180, 70%, 40%) 100%);
-    --gradient-before: linear-gradient(135deg, hsl(35, 85%, 55%) 0%, hsl(25, 80%, 50%) 100%);
-    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(170, 75%, 45%, 0.2) 0%, transparent 50%);
-    
-    /* Glow effects */
-    --glow-after: 0 0 30px hsl(170, 75%, 45%, 0.3);
-    --glow-before: 0 0 30px hsl(35, 85%, 55%, 0.3);
-    --shadow-card: 0 4px 20px hsl(210, 14%, 3%, 0.5);
-    
+    /* Gradients (indigo range) */
+    --gradient-after: linear-gradient(135deg, #4F39F6 0%, #6A5BFA 100%);
+    --gradient-before: linear-gradient(135deg, #4F39F6 0%, #7D6DFE 100%);
+    --gradient-hero: radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      #4F39F633 0%,                  /* ~20% alpha */
+      transparent 50%
+    );
+
+    /* Glows & shadows */
+    --glow-after: 0 0 30px #4F39F64D;   /* indigo glow ~30% */
+    --glow-before: 0 0 30px #EE9D2B4D;  /* amber glow ~30%  */
+    --shadow-card: 0 4px 20px #05060880;/* ~50% alpha */
+
     /* Transitions */
     --transition-smooth: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Buttons (legate de primary) */
+    --button-bg: #4F39F6;
+    --button-fg: #FFFFFF;
+    --button-bg-hover: #4633DC;       /* ușor mai închis */
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
+  /* Borders + body */
+  * { border-color: var(--border); }
+  body {
+    background: var(--background);
+    color: var(--foreground);
   }
 
-  body {
-    @apply bg-background text-foreground;
+  /* Surfaces */
+  .card {
+    background: var(--card);
+    color: var(--card-foreground);
+    box-shadow: var(--shadow-card);
+    border-radius: var(--radius);
   }
+  .popover {
+    background: var(--popover);
+    color: var(--popover-foreground);
+    border-radius: var(--radius);
+  }
+
+  /* Buttons (util dacă nu folosești shadcn Button) */
+  .btn {
+    background: var(--button-bg);
+    color: var(--button-fg);
+    border-radius: calc(var(--radius) - 2px);
+    transition: var(--transition-smooth);
+  }
+  .btn:hover {
+    background: var(--button-bg-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px #4F39F64D;
+  }
+
+  /* Tokens utilitare */
+  .is-primary { color: var(--primary); }
+  .ring-primary:focus,
+  .ring-primary:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Background helpers */
+  .bg-hero-light { background: var(--gradient-hero); }
+  .bg-after { background: var(--gradient-after); }
+  .bg-before { background: var(--gradient-before); }
+
+  /* Glows */
+  .glow-after { box-shadow: var(--glow-after); }
+  .glow-before { box-shadow: var(--glow-before); }
 }

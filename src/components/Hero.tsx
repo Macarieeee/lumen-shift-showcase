@@ -13,13 +13,13 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-hero" />
       
       {/* Background image with overlay */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0">
         <img 
           src={heroImage} 
           alt="Premium lighting design" 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover opacity-40"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/90" />
       </div>
 
       <div className="container relative z-10 px-4 py-20 text-center animate-fade-in-up">
