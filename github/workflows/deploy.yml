@@ -2,7 +2,8 @@ name: Deploy Vite to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - '**'         # rulează pe orice branch (poți restrânge la main mai târziu)
   workflow_dispatch:
 
 permissions:
@@ -18,23 +19,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install deps
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm i; fi
 
-      - name: Build project
+      - name: Build
         run: npm run build
 
-      # 👇 acest pas e esențial pt SPA-uri
+      # fallback pentru SPA (rute interne)
       - name: Add 404 fallback
-        run: cp dist/index.html dist/404.html
+        run: cp dist/index.html dist/404.html || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -47,5 +47,4 @@ jobs:
     environment:
       name: github-pages
     steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4
